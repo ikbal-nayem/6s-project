@@ -21,7 +21,11 @@ const useStyles = makeStyles({
 
 export default function FilterComponent() {
   const classes = useStyles();
-  const [rent_range, setRentRange] = React.useState([100, 1000])
+  const [rent_range, setRentRange] = React.useState([100, 5000])
+
+  const handleChange = ()=>{
+    
+  }
 
 
   return (
@@ -68,9 +72,9 @@ export default function FilterComponent() {
           />
         </FormControl>
       </CardContent>
-      <CardActions className={classes.center}>
+      {/*<CardActions className={classes.center}>
         <Button variant="outlined" size="small">Apply</Button>
-      </CardActions>
+      </CardActions>*/}
     </Card>
   );
 }

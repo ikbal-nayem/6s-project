@@ -42,7 +42,7 @@ export default function Components(props) {
                 </h3>
               </div>
             </GridItem>
-            <GridItem>
+            <GridItem style={{flexGrow: 1, margin: 'auto'}}>
               <SearchBox/>
             </GridItem>
           </GridContainer>

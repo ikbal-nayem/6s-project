@@ -17,19 +17,21 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     margin: 'auto',
     maxWidth: 700,
+    overflow: 'hidden'
   },
   details: {
     padding: theme.spacing(2),
   },
   image: {
     width: 150,
-    height: 150,
+    height: '100%',
   },
   img: {
     margin: 'auto',
     display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover'
   },
   align: {
     display: 'flex',
