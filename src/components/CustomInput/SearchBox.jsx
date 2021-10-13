@@ -1,11 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import parse from 'autosuggest-highlight/parse';
 import axios from 'axios';
 import './override.css'
 
@@ -40,8 +39,9 @@ const optionString = (option)=>{
 }
 
 
-export default function SearchBox() {
+export default function SearchBox({use_in, onChange}) {
   const classes = useStyles();
+  const history = useHistory();
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
@@ -53,6 +53,15 @@ export default function SearchBox() {
       .then(resp => setOptions(resp.data.hits))
   }, [inputValue]);
 
+
+  const handleChange = (_, newValue)=>{
+    setValue(newValue)
+    if(use_in !== 'filter')
+      history.push(`/search?district=${newValue.administrative[1]||'all'}&division=${newValue.administrative[0]}`)
+    else onChange(newValue.administrative)
+  }
+
+  
   return (
     <Autocomplete
       getOptionLabel={(option) => (typeof option === 'string' ? option : optionString(option))}
@@ -63,7 +72,7 @@ export default function SearchBox() {
       filterSelectedOptions
       className={classes.root}
       value={value}
-      onChange={(_, newValue) => setValue(newValue)}
+      onChange={handleChange}
       onInputChange={(_, newInputValue) => setInputValue(newInputValue)}
       renderInput={(params) => (
         <TextField
@@ -72,6 +81,7 @@ export default function SearchBox() {
           style={{borderColor:'red'}}
           variant="filled"
           fullWidth
+          size={use_in==='filter'?'small':'medium'}
         />
       )}
       renderOption={(option) => {

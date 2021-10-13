@@ -1,12 +1,11 @@
 import React from 'react';
+import { useLocation } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { InputAdornment, TextField, Slider, FormControl } from '@material-ui/core';
-import { LocationOnOutlined } from '@material-ui/icons';
+import { TextField, Slider, FormControl } from '@material-ui/core';
+import SearchBox from 'components/CustomInput/SearchBox';
 
 
 const useStyles = makeStyles({
@@ -19,12 +18,20 @@ const useStyles = makeStyles({
   }
 });
 
-export default function FilterComponent() {
+export default function FilterComponent({handleFilter}) {
   const classes = useStyles();
-  const [rent_range, setRentRange] = React.useState([100, 5000])
+  const query = new URLSearchParams(useLocation().search)
+  const [form_inputs, setFormInputs] = React.useState({rent_range: [100, 10000], place: [query.get('division'), query.get('district')]})
 
-  const handleChange = ()=>{
-    
+  const handleLocationChange = (new_loc)=>{
+    handleChange({target: {name: 'Place', value: new_loc}})
+  }
+
+  const handleChange = (e)=>{
+    const name = e.target.name
+    const new_inputs = {...form_inputs, [name]: e.target.value}
+    setFormInputs(new_inputs)
+    handleFilter(new_inputs)
   }
 
 
@@ -32,21 +39,15 @@ export default function FilterComponent() {
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography color="textSecondary" gutterBottom>Filter options</Typography>
-        <TextField
-          label="Location"
-          size="small"
-          margin="normal"
-          fullWidth
-          InputProps={{
-            startAdornment: <InputAdornment position="start"><LocationOnOutlined fontSize="small"/></InputAdornment>,
-          }}
-        />
+        <SearchBox use_in="filter" onChange={handleLocationChange}/>
         <TextField
           label="Chack In"
           size="small"
           type="date"
           margin="normal"
+          name="check_in"
           fullWidth
+          onChange={handleChange}
           InputLabelProps={{shrink: true}}
         />
         <TextField
@@ -55,26 +56,25 @@ export default function FilterComponent() {
           type="date"
           margin="normal"
           fullWidth
+          name="check_out"
+          onChange={handleChange}
           InputLabelProps={{shrink: true}}
         />
         <FormControl margin="normal" fullWidth>
           <Typography id="range-slider" gutterBottom>
-            Rent Range :: <strong>{rent_range[0]} - {rent_range[1]}</strong>
+            Rent Range :: <strong>{form_inputs.rent_range[0]} - {form_inputs.rent_range[1]}</strong>
           </Typography>
           <Slider
-            value={rent_range}
-            onChange={(_, new_val)=>setRentRange(new_val)}
+            value={form_inputs.rent_range}
+            onChange={(_, new_val)=>handleChange({target:{name: 'rent_range', value: new_val}})}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
             max={10000}
-            min={100}
-            step={100}
+            min={200}
+            step={200}
           />
         </FormControl>
       </CardContent>
-      {/*<CardActions className={classes.center}>
-        <Button variant="outlined" size="small">Apply</Button>
-      </CardActions>*/}
     </Card>
   );
 }

@@ -6,7 +6,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { Phone, LocationOn } from '@material-ui/icons';
-import { Chip } from '@material-ui/core';
 import HotelBooking from 'components/Modal/HotelBooking';
 
 const useStyles = makeStyles((theme) => ({

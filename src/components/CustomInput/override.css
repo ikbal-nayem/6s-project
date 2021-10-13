@@ -1,9 +1,8 @@
 .MuiFilledInput-root{
-	background-color: #8fcfedc7 !important;
+	background-color: #ffffffc7 !important;
 	padding: 10px 5px !important;
-	color: #fff !important;
 }
 
 .MuiFilledInput-root:hover{
-	background-color: #54acd1cf !important;
+	background-color: #def2fccf !important;
 }

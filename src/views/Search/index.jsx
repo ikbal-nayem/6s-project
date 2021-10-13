@@ -15,7 +15,16 @@ export default function Components(props) {
   const { ...rest } = props;
   const [hotel_list, setHotelList] = React.useState(hotels)
   const [page_no, setPageNo] = React.useState(0)
+
+  React.useEffect(()=>{
+    const query = new URLSearchParams(props.location.search)
+    console.log(query.get('district'))
+  },[])
   
+
+  const handleFilter = (form_inputs)=>{
+    console.log(form_inputs)
+  }
 
   return (
     <div>
@@ -43,7 +52,7 @@ export default function Components(props) {
               </div>
             </Grid>
             <Grid item xs>
-              <FilterComponent/>
+              <FilterComponent handleFilter={handleFilter}/>
             </Grid>
           </Grid>
         </div>
