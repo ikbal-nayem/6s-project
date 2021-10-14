@@ -3,11 +3,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from hotel.views import HotelViewSet
+from hotel.views import HotelViewSet, RoomTypeViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'hotels', HotelViewSet)
+router.register(r'rooms', RoomTypeViewSet)
 
 
 urlpatterns = [
