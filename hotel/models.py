@@ -4,6 +4,7 @@ from guest.models import Guests
 
 class Hotels(models.Model):
   name = models.CharField(max_length=256)
+  division = models.CharField(max_length=40, null=True, default=None)
   district = models.CharField(max_length=50)
   address = models.TextField()
   rating = models.FloatField()
@@ -20,6 +21,7 @@ class RoomTypes(models.Model):
   number_of_bed = models.PositiveIntegerField(default=1)
   max_guest_allow = models.PositiveIntegerField(default=1)
   number_of_rooms = models.PositiveIntegerField(default=1)
+  rent = models.PositiveIntegerField(null=True, default=1)
 
 
 class Reservation(models.Model):
