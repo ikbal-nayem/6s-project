@@ -42,14 +42,14 @@ export default function Components(props) {
                 </h3>
               </div>
             </GridItem>
-            <GridItem style={{flexGrow: 1, margin: 'auto'}}>
+            <GridItem style={{flexGrow: 1}}>
               <SearchBox/>
             </GridItem>
           </GridContainer>
         </div>
       </Parallax>
 
-      <div className={classNames(classes.main, classes.mainRaised)} style={{marginBottom: 25}}>
+      <div className={classNames(classes.main, classes.mainRaised)}>
         <TopHotels/>
       </div>
 

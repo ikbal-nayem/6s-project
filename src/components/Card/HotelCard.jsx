@@ -41,12 +41,12 @@ export default function HotelCard({hotel}) {
           title={hotel.name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h6" component="h2">
             {hotel.name}
           </Typography>
           <Rating name="read-only" value={hotel.rating} readOnly precision={0.5} size="small" />
           <Typography variant="body3" color="textSecondary" component="p" className={classes.details}>
-            <LocationOn fontSize="small"/> {hotel.location}
+            <LocationOn fontSize="small"/> {hotel.address}
           </Typography>
           <Typography variant="body2" color="secondary" component="p" className={classes.details}>
             <Phone fontSize="small"/> {hotel.phone}

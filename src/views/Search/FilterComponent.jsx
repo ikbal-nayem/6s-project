@@ -24,7 +24,7 @@ export default function FilterComponent({handleFilter}) {
   const [form_inputs, setFormInputs] = React.useState({rent_range: [100, 10000], place: [query.get('division'), query.get('district')]})
 
   const handleLocationChange = (new_loc)=>{
-    handleChange({target: {name: 'Place', value: new_loc}})
+    handleChange({target: {name: 'place', value: new_loc}})
   }
 
   const handleChange = (e)=>{

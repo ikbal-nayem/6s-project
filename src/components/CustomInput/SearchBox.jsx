@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const optionString = (option)=>{
-  return `${option.locale_names[0]}, ${option.administrative[1]?`${option.administrative[1]},`:''} ${option.administrative[0]}`
+  return `${option.locale_names[0]}, ${option?.administrative[1]?`${option?.administrative[1]},`:''} ${option?.administrative[0]}`
 }
 
 
@@ -57,8 +57,8 @@ export default function SearchBox({use_in, onChange}) {
   const handleChange = (_, newValue)=>{
     setValue(newValue)
     if(use_in !== 'filter')
-      history.push(`/search?district=${newValue.administrative[1]||'all'}&division=${newValue.administrative[0]}`)
-    else onChange(newValue.administrative)
+      history.push(`/search?district=${newValue?.administrative[1]||'all'}&division=${newValue?.administrative[0]}`)
+    else onChange(newValue?.administrative)
   }
 
   
