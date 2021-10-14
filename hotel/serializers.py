@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Hotels, RoomTypes, Reservation
+from .models import Hotels, RoomTypes
 
 
 class HotelSerializer(serializers.HyperlinkedModelSerializer):
