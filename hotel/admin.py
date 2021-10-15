@@ -7,7 +7,7 @@ class HotelAdmin(admin.ModelAdmin):
 
 
 class RoomTypeAdmin(admin.ModelAdmin):
-  list_display = ('hotel', 'number_of_rooms', 'number_of_bed', 'max_guest_allow')
+  list_display = ('hotel', 'number_of_rooms', 'number_of_bed', 'max_guest_allow', 'rent')
 
 
 class ReservationAdmin(admin.ModelAdmin):
