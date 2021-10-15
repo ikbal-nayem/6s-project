@@ -15,6 +15,7 @@ export default function Components(props) {
   const [room_list, setRoomList] = React.useState([])
   const [page_no, setPageNo] = React.useState(0)
   const [loading, setLoading] = React.useState(true)
+  const filter_info = React.useRef({})
 
   React.useEffect(()=>{
     const query = new URLSearchParams(props.location.search)
@@ -24,6 +25,7 @@ export default function Components(props) {
 
   const handleFilter = (form_inputs)=>{
     setLoading(true)
+    filter_info.current = form_inputs
     const query_data = new URLSearchParams(form_inputs).toString()
     axios.get('/rooms/?'+query_data)
       .then(resp => setRoomList(resp.data))
@@ -53,7 +55,7 @@ export default function Components(props) {
               {!loading
                 ? <React.Fragment>
                     {room_list.slice(10*page_no, 10*page_no+10).map(room => (
-                      <HotelBookCard room={room}/>
+                      <HotelBookCard filter_info={filter_info} room={room}/>
                     ))}
                     <div style={{display: 'flex', justifyContent: 'center', marginTop: 25, marginBottom: 20}}>
                       <Pagination count={parseInt(room_list.length/10)+1} variant="outlined" color="secondary" onChange={(_, page)=>setPageNo(page-1)} />

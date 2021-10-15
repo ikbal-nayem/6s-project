@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function HotelBookCard({room}) {
+export default function HotelBookCard({room, filter_info}) {
   const classes = useStyles();
 
   return (
@@ -86,7 +86,7 @@ export default function HotelBookCard({room}) {
             </Grid>
             <Grid item className={classes.alignEnd}>
               <Typography variant="subtitle1">৳ {room.rent}</Typography>
-              <HotelBooking/>
+              <HotelBooking filter_info={filter_info}/>
             </Grid>
           </Grid>
         </Grid>

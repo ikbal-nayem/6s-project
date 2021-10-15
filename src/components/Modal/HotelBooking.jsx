@@ -4,9 +4,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Button, Chip, Grid, TextField } from '@material-ui/core';
+import axios from 'Utils/Api';
+import cogoToast from 'cogo-toast';
 
 
-export default ()=>{
+export default ({filter_info})=>{
   const [open, setOpen] = React.useState()
   const [form_inputs, setFormInputs] = React.useState({})
 
@@ -17,7 +19,12 @@ export default ()=>{
   }
 
   const handleSubmit = ()=>{
-    console.log(form_inputs)
+    form_inputs['check_in'] = filter_info.current['check_in']
+    form_inputs['check_out'] = filter_info.current['check_out']
+    axios.post('/guests/', form_inputs)
+      .then(resp => cogoToast.success('Your room has been booked successfully!'))
+      .catch((error)=> cogoToast.error('Something went wrong, please try again leter.'))
+      .finally(()=>handleClose())
   }
 
   return(
@@ -39,7 +46,7 @@ export default ()=>{
                 <TextField
                   label="Guest Name"
                   size="small"
-                  name="g_name"
+                  name="name"
                   fullWidth
                   autoFocus
                   onChange={handleChange}
@@ -48,7 +55,7 @@ export default ()=>{
               <Grid item md={6}>
                 <TextField
                   label="Phone number"
-                  name="g_phone"
+                  name="phone"
                   size="small"
                   type="number"
                   fullWidth
@@ -58,7 +65,7 @@ export default ()=>{
               <Grid item md={6}>
                 <TextField
                   label="Email"
-                  name="g_email"
+                  name="email"
                   size="small"
                   type="email"
                   fullWidth
@@ -68,7 +75,7 @@ export default ()=>{
               <Grid item xs={12}>
                 <TextField
                   label="Address"
-                  name="g_address"
+                  name="address"
                   size="small"
                   fullWidth
                   multiline
